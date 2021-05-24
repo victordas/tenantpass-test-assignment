@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 
 services:
   users-service:
@@ -9,11 +9,33 @@ services:
       - 3000:3000
     environment:
       PORT: 3000
-#  message-service:
-#    build:
-#      context: message-service
-#      dockerfile: Dockerfile
-#    ports:
-#      - 3100:3000
-#    environment:
-#      PORT: 3000
+  message-service:
+    build:
+      context: message-service
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3000
+    volumes:
+      - ./message-service:/app
+    depends_on:
+      - db
+  message-ui:
+    build:
+      context: message-ui
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./message-ui:/app
+    stdin_open: true
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+        MYSQL_DATABASE: messages
+        MYSQL_PASSWORD: root
+        MYSQL_ROOT_PASSWORD: root
+    volumes:
+        - .dbdata:/var/lib/mysql
+    ports:
+        - 43066:3306

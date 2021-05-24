@@ -1,0 +1,15 @@
+@import url('./bootstrap.min.css');
+
+.centered {
+    margin: 1rem auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .focused {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+  }
