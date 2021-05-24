@@ -1,13 +1,8 @@
-FROM node:alpine
-WORKDIR /opt/app
+FROM node:16.2
 
-COPY package.json ./
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
+COPY . ./
 
-COPY nest-cli.json ./
-COPY tsconfig.json ./
-COPY tsconfig.build.json ./
-COPY src ./src
-RUN npm run build
-
-CMD npm run start
+CMD npm run start:dev
