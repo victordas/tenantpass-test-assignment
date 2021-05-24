@@ -28,6 +28,15 @@ services:
     volumes:
       - ./message-ui:/app
     stdin_open: true
+  chat-ui:
+    build:
+      context: chat-ui
+      dockerfile: Dockerfile
+    ports:
+      - 4001:4001
+    volumes:
+      - ./chat-ui:/app
+    stdin_open: true
   db:
     image: mysql:latest
     restart: always
